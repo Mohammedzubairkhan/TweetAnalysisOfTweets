@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://java.sun.com/xml/ns/javaee" 
+         version="2.5" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"> 
+  <display-name>Archetype Created Web Application</display-name>
+  <welcome-file-list>
+    <welcome-file>HashtagServlet</welcome-file>
+</welcome-file-list>
+  <servlet>
+  	<display-name>HashtagServlet</display-name>
+  	<servlet-name>HashtagServlet</servlet-name>
+    	  	<servlet-class>last.HashtagServlet</servlet-class>
+
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>HashtagServlet</servlet-name>
+  	<url-pattern>/HashtagServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <display-name>NamedEntityFirst</display-name>
+  	<servlet-name>NamedEntityFirst</servlet-name>
+  	  	  	<servlet-class>last.NamedEntityFirst</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NamedEntityFirst</servlet-name>
+  	<url-pattern>/NamedEntityFirst</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <display-name>NamedEntitySecond</display-name>
+  	<servlet-name>NamedEntitySecond</servlet-name>
+  	  	  	<servlet-class>last.NamedEntitySecond</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>NamedEntitySecond</servlet-name>
+  	<url-pattern>/NamedEntitySecond</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <display-name>WordCloudServlet</display-name>
+  	<servlet-name>WordCloudServlet</servlet-name>
+  	  	  	<servlet-class>last.WordCloudServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>WordCloudServlet</servlet-name>
+  	<url-pattern>/WordCloudServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <display-name>WordCloudwordServlet</display-name>
+  	<servlet-name>WordCloudwordServlet</servlet-name>
+  	  	  	<servlet-class>last.WordCloudwordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>WordCloudwordServlet</servlet-name>
+  	<url-pattern>/WordCloudwordServlet</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+  <display-name>TweetGraphServlet</display-name>
+  	<servlet-name>TweetGraphServlet</servlet-name>
+  	  	  	<servlet-class>last.TweetGraphServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TweetGraphServlet</servlet-name>
+  	<url-pattern>/TweetGraphServlet</url-pattern>
+  </servlet-mapping>
+
+<servlet>
+  <display-name>TweetPullingServlet</display-name>
+  	<servlet-name>TweetPullingServlet</servlet-name>
+  	  	  	<servlet-class>last.TweetPullingServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>TweetPullingServlet</servlet-name>
+  	<url-pattern>/TweetPullingServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
+
