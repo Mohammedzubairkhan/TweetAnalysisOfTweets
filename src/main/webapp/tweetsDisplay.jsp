@@ -5,7 +5,7 @@
 <html>
 <head>
 <title>List of trending topics</title>
-
+<link rel="stylesheet" href="./style.css">
 <style>
 body {
 	background-color: #eeeeee;
@@ -37,6 +37,34 @@ body {
 </style>
 </head>
 <body>
+    <div id="cssmenu">
+  	<ul>
+  	<li>
+	 <c:url value="NamedEntitySecond" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Named Entity Graph</span> </a>
+	</li>
+	<li>
+	 <c:url value="WordCloudServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Named entity WordCloud </span></a>
+	</li>
+	<li>
+	 <c:url value="WordCloudwordServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>WordCloud</span> </a>
+	</li>
+	<li>
+	 <c:url value="TweetPullingServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Tweets<span></a>
+	</li>
+	</ul>
+  </div>
 	<link
 		href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"
 		rel="stylesheet" id="bootstrap-css">

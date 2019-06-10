@@ -56,7 +56,7 @@ public class WordCloudServlet extends HttpServlet {
 		request.setAttribute("wordCloudNe", temp);
 		request.setAttribute("topic", topic);
 
-		System.out.println(wordCloud);
+		//System.out.println(wordCloud);
 		RequestDispatcher rd = request.getRequestDispatcher("/wordCloudNe.jsp");
 		rd.forward(request, response);
 	}

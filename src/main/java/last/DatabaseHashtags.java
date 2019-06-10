@@ -17,7 +17,7 @@ public class DatabaseHashtags {
 		try
         {
             Object object = parser
-                    .parse(new FileReader("M:\\TweetRepo\\twitter-trendstweet-for-october-2017\\October.txt"));
+                    .parse(new FileReader("/home/mohammed_rafeeq/twitter/October.txt"));
             
             //convert Object to JSONObject
             jsonObject = (JSONObject)object;
@@ -26,7 +26,7 @@ public class DatabaseHashtags {
         }
 
 		JSONObject obj = (JSONObject)jsonObject.get("10-01-2017");
-		System.out.print(obj.keySet());
+
 		Iterator value = obj.keySet().iterator();
 
 		try {

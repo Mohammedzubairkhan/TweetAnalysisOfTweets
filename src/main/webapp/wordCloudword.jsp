@@ -6,9 +6,38 @@
 <meta charset="utf-8">
 <html>
 <head>
+<link rel="stylesheet" href="./style.css">
 <title>cloud</title>
 </head>
 <body>
+   <div id="cssmenu">
+	<ul>
+	<li>
+ <c:url value="NamedEntitySecond" var="url">
+				<c:param name="param" value="${topic}" />
+			</c:url>
+			<a href="${url}"><span>Named Entity Graph</span> </a>
+</li>
+<li>
+ <c:url value="WordCloudServlet" var="url">
+				<c:param name="param" value="${topic}" />
+			</c:url>
+			<a href="${url}"><span>Named entity WordCloud </span></a>
+</li>
+<li>
+ <c:url value="WordCloudwordServlet" var="url">
+				<c:param name="param" value="${topic}" />
+			</c:url>
+			<a href="${url}"><span>WordCloud</span> </a>
+</li>
+<li>
+ <c:url value="TweetPullingServlet" var="url">
+				<c:param name="param" value="${topic}" />
+			</c:url>
+			<a href="${url}"><span>Tweets<span></a>
+</li>
+</ul>
+</div>
 <div align="center">
 <script src="http://d3js.org/d3.v3.min.js"></script>
   <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>

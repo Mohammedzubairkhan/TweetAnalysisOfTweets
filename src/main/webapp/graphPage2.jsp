@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta charset="utf-8">
-
+<link rel="stylesheet" href="./style.css">
+ <link rel="stylesheet" href="./style1.css">
     <title>Tree Example</title>
 
     <style>
@@ -32,39 +33,75 @@
     height:auto;
     width:auto;
     float:bottom;
-    padding:5px;          
+    padding:5px;  
+    }
+    
+    
+ .middle_header {
+font-size: 50px;
+color:		#FFFFFF;
+margin-top: 8px;
+margin-left: 3px;
+  background-color:#00BFFF;
+  text-align: center;
+  width: 1260px;
+  height: 378px;
 }
+.image-content {
+display: grid;
+grid-template-columns: 600px auto;
+}
+
+.button-grid {
+margin-top: -300px;
+margin-left: 430px;
+display: grid;
+grid-template-columns: 620px 100px;
+}        
     </style>
 
   </head>
 
   <body>
 
- <header>
-    <button onclick="expandAll()">Expand All</button>
-    <button onclick="collapseAll()">Collapse All</button>
-  </header>
-  <div>
+   <div id="cssmenu">
+  	<ul>
+  	<li>
 	 <c:url value="NamedEntitySecond" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">Open Named Entity Graph </a></div>
-				
-				<div>
+				<a href="${url}"><span>Named Entity Graph</span> </a>
+	</li>
+	<li>
 	 <c:url value="WordCloudServlet" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">Open named entity word cloud </a></div>
-				
-				<div>
+				<a href="${url}"><span>Named entity WordCloud </span></a>
+	</li>
+	<li>
 	 <c:url value="WordCloudwordServlet" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">Open word cloud </a></div>
-
-<!--  <div id ="graph">-->
-				
-				<h1>${topic} Tweets Graph :</h1>
+				<a href="${url}"><span>WordCloud</span> </a>
+	</li>
+	<li>
+	 <c:url value="TweetPullingServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Tweets<span></a>
+	</li>
+	</ul>
+  </div>
+<div class="middle_header">
+<div class="image-content"><img src="images/twitter-clipart-10.jpg"  height="378px">
+				<div class="topic">${topic} </div>
+				<div class="topic">Named Entity Graph</div>
+				</div>
+				<div class="button-grid">
+				 <button class="button" onclick="expandAll()">Expand</button>
+    <button class="button gray" class="gray" onclick="collapseAll()">Collapse</button>
+				</div>	
+				</div>
 
 <!-- load the d3.js library -->	
 <script type="text/javascript" src="http://d3js.org/d3.v3.min.js"></script>
