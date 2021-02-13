@@ -6,7 +6,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-
+ <link rel="stylesheet" href="./style.css">
     <title>Tree Example</title>
 
     <style>
@@ -31,12 +31,51 @@
 	  stroke-width: 2px;
 	}
 	
+	.tweet {
+	margin-top: 20px;
+	font-size: 17px;
+	font-style: Helvetica;
+	}
+	
     </style>
 
   </head>
 
   <body>
-${tweet}
+  
+   <div id="cssmenu">
+  	<ul>
+  	<li>
+	 <c:url value="NamedEntitySecond" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Named Entity Graph</span> </a>
+	</li>
+	<li>
+	 <c:url value="WordCloudServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Named entity WordCloud </span></a>
+	</li>
+	<li>
+	 <c:url value="WordCloudwordServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>WordCloud</span> </a>
+	</li>
+	<li>
+	 <c:url value="TweetPullingServlet" var="url">
+					<c:param name="param" value="${topic}" />
+				</c:url>
+				<a href="${url}"><span>Tweets<span></a>
+	</li>
+	</ul>
+  </div>
+  <div class="tweet">
+  <h3>Tweet</h3>
+  ${tweet}
+  </div>
+
 <!-- load the d3.js library -->	
 <script src="http://d3js.org/d3.v3.min.js"></script>
 	

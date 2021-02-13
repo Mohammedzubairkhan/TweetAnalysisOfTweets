@@ -44,7 +44,7 @@ public class TweetsGet {
         } catch (TwitterException te) {
         	tweetsList.add("nothingMZK");
             te.printStackTrace();
-            System.out.println("Failed to search tweets: " + te.getMessage());
+            //System.out.println("Failed to search tweets: " + te.getMessage());
             
         }
         

@@ -42,7 +42,7 @@ public class test {
             System.exit(0);
         } catch (TwitterException te) {
             te.printStackTrace();
-            System.out.println("Failed to search tweets: " + te.getMessage());
+            //System.out.println("Failed to search tweets: " + te.getMessage());
             System.exit(-1);
         }
     }

@@ -47,16 +47,18 @@ public class AprioriForWords<T> {
 	MongoClient client;
 	DB database;
 	private String topic;
-	
+
 	public AprioriForWords(MongoClient clientInput, DB databaseInput, String topicInput) {
 		client = clientInput;
 		database = databaseInput;
 		topic = topicInput;
 	}
+
 	Map<Set<T>, Set<Integer>> idReferenceForTweets = new HashMap<Set<T>, Set<Integer>>();
 	Map<Set<String>, Set<Integer>> transMap = new HashMap<Set<String>, Set<Integer>>();
 	JSONObject tweetsObject = null;
 	JSONObject pairObject = null;
+
 	public List<List<T>> sortList(List<Set<T>> frequentItemSets) {
 
 		List<List<T>> list = new ArrayList<List<T>>();
@@ -78,7 +80,7 @@ public class AprioriForWords<T> {
 
 	public Map<Set<T>, Integer> findFrequent1Itemsets(List<Set<T>> transactions, int minSupport) {
 		Map<Set<T>, Integer> supportMap = new HashMap<Set<T>, Integer>();
-		
+
 		for (Set<T> transaction : transactions) {
 			// Using Set collection to avoid duplicate items per transaction
 			Set<Integer> valueId = transMap.get(transaction);
@@ -189,7 +191,6 @@ public class AprioriForWords<T> {
 		return n;
 	}
 
-
 	public JSONArray wordCloudCalculator(Map<Set<String>, Integer> frequentItemCounts) {
 		Map<String, Integer> count = new HashMap<String, Integer>();
 		JSONArray wordCloud = new JSONArray();
@@ -216,7 +217,7 @@ public class AprioriForWords<T> {
 					count.put(key, value);
 				}
 
-				}
+			}
 
 			// System.out.println(count);
 			// writing to file
@@ -224,7 +225,7 @@ public class AprioriForWords<T> {
 		}
 		JSONObject tweetJson = new JSONObject();
 		HashMap<String, Integer> tweetMap = new HashMap<>();
-		for(Map.Entry<String, Integer> k : count.entrySet()) {
+		for (Map.Entry<String, Integer> k : count.entrySet()) {
 			String score = k.getValue().toString();
 			JSONObject wordRep = new JSONObject();
 			String word = k.getKey();
@@ -234,51 +235,48 @@ public class AprioriForWords<T> {
 			wordCloud.add(wordRep);
 		}
 		tweetMap = sortByValue(tweetMap);
-		int i=0;
-		for(Map.Entry<String, Integer> k : tweetMap.entrySet()) {
+		int i = 0;
+		for (Map.Entry<String, Integer> k : tweetMap.entrySet()) {
 			tweetJson.put(String.valueOf(i), k.getKey());
 			i++;
 		}
-		//tweetJson.putAll(tweetMap);
+		// tweetJson.putAll(tweetMap);
 		System.out.println(tweetJson);
 		DBCollection collection = database.getCollection(topic);
 		DBObject object = new BasicDBObject("_id", "wordCloudword").append("desc", wordCloud);
-		
+
 		collection.insert(object);
 		DBObject object1 = new BasicDBObject("_id", "tweetJson").append("desc", tweetJson);
 		collection.insert(object1);
-		
+
 		return wordCloud;
 	}
-	 public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) 
-	    { 
-	        // Create a list from elements of HashMap 
-	        List<Map.Entry<String, Integer> > list = 
-	               new LinkedList<Map.Entry<String, Integer> >(hm.entrySet()); 
-	  
-	        // Sort the list 
-	        Collections.sort(list, new Comparator<Map.Entry<String, Integer> >() { 
-	            public int compare(Map.Entry<String, Integer> o1,  
-	                               Map.Entry<String, Integer> o2) 
-	            { 
-	                return (o1.getValue()).compareTo(o2.getValue()); 
-	            } 
-	        }); 
-	          
-	        // put data from sorted list to hashmap  
-	        int i=0;
-	        HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>(); 
-	        for (Map.Entry<String, Integer> aa : list) { 
-	            temp.put(aa.getKey(), aa.getValue()); 
-	            i++;
-	            if(i==10)
-	            {
-	            	break;
-	            }
-	            
-	        } 
-	        return temp; 
-	    } 
+
+	public static HashMap<String, Integer> sortByValue(HashMap<String, Integer> hm) {
+		// Create a list from elements of HashMap
+		List<Map.Entry<String, Integer>> list = new LinkedList<Map.Entry<String, Integer>>(hm.entrySet());
+
+		// Sort the list
+		Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+			public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+				return (o1.getValue()).compareTo(o2.getValue());
+			}
+		});
+
+		// put data from sorted list to hashmap
+		int i = 0;
+		HashMap<String, Integer> temp = new LinkedHashMap<String, Integer>();
+		for (Map.Entry<String, Integer> aa : list) {
+			temp.put(aa.getKey(), aa.getValue());
+			i++;
+			if (i == 10) {
+				break;
+			}
+
+		}
+		return temp;
+	}
+
 	/**
 	 * Get frequent items set from the first generated and support count map
 	 * 
@@ -468,7 +466,7 @@ public class AprioriForWords<T> {
 	 * @param frequentItemSets a set of frequent items
 	 * @throws ParseException
 	 */
-	
+
 	/**
 	 * Read transaction data from file
 	 * 
@@ -516,25 +514,15 @@ public class AprioriForWords<T> {
 
 		return transactions;
 	}
-/*public static void main(String[] args) {
-	JSONObject tree = null;
-	String topic = "Gano";
-	MongoClient client = new MongoClient();
-	DB database = client.getDB("mzk");
-	AprioriWithTweets<String> serviceImpl = new AprioriWithTweets<String>(client, database, topic);
-	List<Set<String>> data = null;
-	try {
-		data = serviceImpl.readTransactions();
-	} catch (ParseException e) {
-		e.printStackTrace();
-	}
-	Map<Set<String>, Integer> frequentItemSets = serviceImpl.generateFrequentItemSets(data, 2);
-	// add topic at end
-	try {
-		 tree = serviceImpl.printCandidates(frequentItemSets);
-	} catch (ParseException e) {
-		e.printStackTrace();
-	}
-	serviceImpl.wordCloudCalculator(frequentItemSets);
-}*/
+	/*
+	 * public static void main(String[] args) { JSONObject tree = null; String topic
+	 * = "Gano"; MongoClient client = new MongoClient(); DB database =
+	 * client.getDB("mzk"); AprioriWithTweets<String> serviceImpl = new
+	 * AprioriWithTweets<String>(client, database, topic); List<Set<String>> data =
+	 * null; try { data = serviceImpl.readTransactions(); } catch (ParseException e)
+	 * { e.printStackTrace(); } Map<Set<String>, Integer> frequentItemSets =
+	 * serviceImpl.generateFrequentItemSets(data, 2); // add topic at end try { tree
+	 * = serviceImpl.printCandidates(frequentItemSets); } catch (ParseException e) {
+	 * e.printStackTrace(); } serviceImpl.wordCloudCalculator(frequentItemSets); }
+	 */
 }

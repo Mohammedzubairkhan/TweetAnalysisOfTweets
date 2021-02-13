@@ -75,7 +75,7 @@ public class TweetPullingServlet extends HttpServlet {
 		request.setAttribute("tweetScore", allTweets);
 		request.setAttribute("topic", topic);
 
-		System.out.println(tweetScore);
+		//System.out.println(tweetScore);
 		RequestDispatcher rd = request.getRequestDispatcher("/tweetsDisplay.jsp");
 		rd.forward(request, response);
 	}

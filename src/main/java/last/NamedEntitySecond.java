@@ -33,7 +33,7 @@ public class NamedEntitySecond extends HttpServlet {
 		JSONObject tree2 = null;
 		String topic = request.getParameter("param");
 
-		System.out.println("topic = "+ topic);
+		//System.out.println("topic = "+ topic);
 		boolean containFlag = false;
 		MongoClient client = new MongoClient();
 		DB database = client.getDB("mzk");
@@ -61,7 +61,7 @@ public class NamedEntitySecond extends HttpServlet {
 		request.setAttribute("tree2", temp2);
 		request.setAttribute("topic", topic);
 
-		System.out.println(temp2);
+//		System.out.println(temp2);
 		RequestDispatcher rd = request.getRequestDispatcher("/graphPage2.jsp");
 		rd.forward(request, response);
 	}

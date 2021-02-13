@@ -4,6 +4,8 @@
 <%@ page isELIgnored="false"%>
 <html  xmlns:xlink="http://www.w3.org/1999/xlink">
   <head>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style1.css">
     <meta charset="utf-8">
 
     <title>Tree Example</title>
@@ -71,41 +73,79 @@ ul.select2-results {
 #block_container {
   display: inline;
 }
+
+.middle_header {
+font-size: 50px;
+color:		#FFFFFF;
+margin-top: 8px;
+margin-left: 3px;
+  background-color:#00BFFF;
+  text-align: center;
+  width: 1260px;
+  height: 378px;
+}
+
+.image-content {
+display: grid;
+grid-template-columns: 600px auto;
+}
+
+.topic {
+margin-top: 60px;
+margin-right: 200px;
+}
+
+.button-grid {
+margin-top: -300px;
+margin-left: 430px;
+display: grid;
+grid-template-columns: 620px 100px;
+}
+
     </style>
 
   </head>
 
   <body>
-  <header>
-    <button onclick="expandAll()">Expand All</button>
-    <button onclick="collapseAll()">Collapse All</button>
-  </header>
-  <div>
+  <div id="cssmenu">
+  	<ul>
+  	<li>
 	 <c:url value="NamedEntitySecond" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">Open Named Entity Graph </a></div>
-				
-				<div>
+				<a href="${url}"><span>Named Entity Graph</span> </a>
+	</li>
+	<li>
 	 <c:url value="WordCloudServlet" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">Open named entity word cloud </a></div>
-				
-				<div>
+				<a href="${url}"><span>Named entity WordCloud </span></a>
+	</li>
+	<li>
 	 <c:url value="WordCloudwordServlet" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">Open word cloud </a></div>
-				
-<div>
+				<a href="${url}"><span>WordCloud</span> </a>
+	</li>
+	<li>
 	 <c:url value="TweetPullingServlet" var="url">
 					<c:param name="param" value="${topic}" />
 				</c:url>
-				<a href="${url}">tweets </a></div>
+				<a href="${url}"><span>Tweets<span></a>
+	</li>
+	</ul>
+  </div>
 <!--  <div id ="graph">-->
-				
-				<h1>${topic} Tweets Graph :</h1>
+				<div class="middle_header">
+				<div class="image-content"><img src="images/twitter-clipart-10.jpg"  height="378px">
+				<div class="topic">${topic}
+				Named Entity Graph</div>
+				</div>
+				<div class="button-grid">
+				 <button class="button" onclick="expandAll()">Expand</button>
+    <button class="button gray" class="gray" onclick="collapseAll()">Collapse</button>
+				</div>	
+				</div>
 
 <!-- load the d3.js library -->	
 <script src="http://cdnjs.cloudflare.com/ajax/libs/d3/3.4.13/d3.min.js"></script>

@@ -22,7 +22,7 @@ public class DatabaseTweets {
 		try
         {
             Object object = parser
-                    .parse(new FileReader("M:\\TweetRepo\\twitter-trendstweet-for-october-2017\\October_tweets.txt"));
+                    .parse(new FileReader("/home/mohammed_rafeeq/twitter/October_tweets.txt"));
             
             //convert Object to JSONObject
             jsonObject = (JSONObject)object;
@@ -53,10 +53,10 @@ public class DatabaseTweets {
 				}
 	
 				DBObject object = new BasicDBObject("_id", tags.next() ).append("desc", modifiedObject);
-				System.out.println(object);
+//				System.out.println(object);
 				collection.insert(object);
-				client.close();
 			}
+			client.close();
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -226,7 +226,7 @@ public class AprioriWithTweets<T> {
 			wordRep.put("weight", score);
 			wordCloud.add(wordRep);
 		}
-		System.out.println(wordCloud);
+	
 		DBCollection collection = database.getCollection(topic);
 		DBObject object = new BasicDBObject("_id", "wordCloudNe").append("desc", wordCloud);
 
@@ -425,16 +425,14 @@ public class AprioriWithTweets<T> {
 	public JSONArray mappingMaker(Set<Set<String>> selectedOne, Set<String> overOne) {
 		Iterator<Set<String>> sameEvaluate = selectedOne.iterator();
 		JSONArray childReturn = new JSONArray();
-		System.out.println("new call" +selectedOne+overOne);
 		while(sameEvaluate.hasNext())
 		{
 			if(sameEvaluate.next().equals(overOne)) {
 				sameEvaluate.remove();
-				System.out.println("complete" + overOne);
 				JSONObject objChild = new JSONObject();
 				objChild.put("name", "Tweets");
 				objChild.put("children", tweetsReturner(overOne));
-				System.out.println("complete2" + objChild);
+				//System.out.println("complete2" + objChild);
 
 				childReturn.add(objChild);
 				break;
@@ -444,37 +442,37 @@ public class AprioriWithTweets<T> {
 		
 		while(!selectedOne.isEmpty()) {
 			String child = null;
-			System.out.println("set ---" +selectedOne );
-			System.out.println("overOne = "+overOne);
+			//System.out.println("set ---" +selectedOne );
+			//System.out.println("overOne = "+overOne);
 
 			Set<String> temp = selectedOne.iterator().next();
-			System.out.println(temp);
+			//System.out.println(temp);
 			Iterator<String> it = temp.iterator();
 			
 			//find the string not in overOnes
 			while(it.hasNext()) {
 				String itValue = it.next();
-				System.out.println("itvalue "+itValue);
+				//System.out.println("itvalue "+itValue);
 
 				if(!overOne.contains(itValue)) {
 					child = itValue;
 					break;
 					}
 			}
-			System.out.println("child = "+child);
+			//System.out.println("child = "+child);
 			overOne.add(child);
 			Iterator<Set<String>> sameEvaluate2 = selectedOne.iterator();
 			Set<Set<String>> selectedOnes2 = new HashSet<Set<String>>();
-		    System.out.println(child);
+		   // System.out.println(child);
 		    
 			while(sameEvaluate2.hasNext()) {
 				Set<String> se2Value = sameEvaluate2.next();
-			    System.out.println("se2value" + se2Value);
+			    //System.out.println("se2value" + se2Value);
 
 				if(se2Value.contains(child))
 				{
 				    selectedOnes2.add(se2Value);
-				    System.out.println("9999" + se2Value);
+				  //  System.out.println("9999" + se2Value);
 					sameEvaluate2.remove();
 					//selectedOne.remove(sameEvaluate2.next());
 				}
@@ -484,10 +482,10 @@ public class AprioriWithTweets<T> {
 			objChild.put("name", child);
 			Set<String> overOne2 = new HashSet<String>(overOne);
 			objChild.put("children", mappingMaker(selectedOnes2, overOne2));
-		    System.out.println("out of call" + selectedOne+"\n+"+overOne);
+		   // System.out.println("out of call" + selectedOne+"\n+"+overOne);
 		    overOne.remove(child);
 			childReturn.add(objChild);	
-			System.out.println(childReturn);
+			//System.out.println(childReturn);
 		}
 		return childReturn;
 	}
@@ -530,6 +528,11 @@ public class AprioriWithTweets<T> {
 	public JSONObject printCandidates(Map<Set<String>, Integer> frequentItemSets) throws ParseException {
 
 		// Accessing tweets json
+		for(Map.Entry<Set<String>, Integer> fq : frequentItemSets.entrySet()) {
+			System.out.print(fq.getKey().toString());
+			System.out.print(fq.getValue().toString());
+		}
+		System.out.println(frequentItemSets.toString());
 		DBCollection collection = database.getCollection("tweets");
 		Object input = collection.findOne(topic).get("desc");
 		String inputText = new JSON().serialize(input);
@@ -561,13 +564,11 @@ public class AprioriWithTweets<T> {
 		Iterator<Map.Entry<Set<String>, Integer>> iterator = frequentSetsRemove.entrySet().iterator();
 		while(!frequentSetsRemove.isEmpty()) {
 			Map.Entry<Set<String>, Integer> nextEntry = frequentSetsRemove.entrySet().iterator().next();
-		    System.out.println("it1--"+nextEntry);
 
 			String firstItem = nextEntry.getKey().iterator().next();
 			Set<Set<String>> selectedOnes = new HashSet<Set<String>>();
 			Set<String> overOnes = new HashSet<String>();
 			overOnes.add(firstItem);
-		    System.out.println(firstItem);
 
 			Iterator<Map.Entry<Set<String>, Integer>> iterator2 = frequentSetsRemove.entrySet().iterator();
 
@@ -575,18 +576,17 @@ public class AprioriWithTweets<T> {
 				Map.Entry<Set<String>, Integer> nextEntry2 = iterator2.next();
 
 				boolean k = nextEntry2.getKey().contains(firstItem);
-				   System.out.println("k=="+k);
+		
 
 				   if(k) {
 					   
-					   System.out.println(nextEntry2.getKey().contains(firstItem));
-				    System.out.println("it2--"+nextEntry2.getKey());
+				
 					selectedOnes.add(nextEntry2.getKey());
 				iterator2.remove();
 					//	frequentSetsRemove.remove(iterator2.next().getKey());
 				}
 			}
-		    System.out.println(selectedOnes);
+		 
 
 			JSONArray child = mappingMaker(selectedOnes, overOnes);
 			JSONObject firstJson = new JSONObject();
@@ -595,7 +595,7 @@ public class AprioriWithTweets<T> {
 			childrenNe.add(firstJson);
 		}
 		graph2.put("children", childrenNe);
-		System.out.println(graph2);
+		//System.out.println(graph2);
 		
 		
 		for (Map.Entry<Set<String>, Integer> candidate : frequentItemSets.entrySet()) {

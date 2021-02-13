@@ -39,7 +39,7 @@ public class TweetGraphServlet extends HttpServlet {
 
 		MongoClient client = new MongoClient();
 		DB database = client.getDB("mzk");
-		System.out.println(topic);
+		//System.out.println(topic);
 			DBCollection collection = database.getCollection(topic);
 			System.out.println(topic+ "---" +tweet+"~~~~~~~~~~~" +tid);
 			Object input1 = collection.findOne("nePairing").get("desc");
@@ -76,7 +76,7 @@ public class TweetGraphServlet extends HttpServlet {
 			}
 			
 			tweetGraph.put("children", children);
-			System.out.println(tweetGraph);
+			//System.out.println(tweetGraph);
 		client.close();
 		
 		JSONArray treeArray = new JSONArray();
